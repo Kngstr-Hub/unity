@@ -433,14 +433,14 @@ class Component extends DCLogic {
   componentDidMount() { this._r = () => { const m = window.innerWidth < 860; if (m !== this.state.mobile) this.setState({ mobile: m, menu: false }); }; window.addEventListener('resize', this._r); this._r(); }
   componentWillUnmount() { window.removeEventListener('resize', this._r); document.body.style.overflow = ''; }
   componentDidUpdate() { document.body.style.overflow = this.state.menu ? 'hidden' : ''; }
-  go(p) { const F = {"home":"index.html","services":"services.html","areas":"areas.html","rentals":"rentals.html","about":"about.html","faq":"faq.html","contact":"contact.html"}; return (e) => { if (e && e.preventDefault) e.preventDefault(); window.location.href = F[p]; }; }
+  go(p) { const F = {"home":"index.html","services":"services.html","areas":"areas.html","rentals":"rentals.html","about":"about.html","faq":"faq.html","contact":"contact.html","realtor":"realtor.html"}; return (e) => { if (e && e.preventDefault) e.preventDefault(); window.location.href = F[p]; }; }
   renderVals() {
     const page = 'about';
-    const nav = [['services','Services'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ']].map(([id,label]) => ({
+    const nav = [['services','Services'],['realtor','Buy & Sell'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ']].map(([id,label]) => ({
       label, onClick: this.go(id), color: page === id ? '#0A0A0A' : '#0A0A0A', line: page === id ? '#A8864F' : 'transparent'
     }));
     const open = this.state.menu;
-    const mobileNav = [['home','Home'],['services','Services'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ']].map(([id,label],i) => ({
+    const mobileNav = [['home','Home'],['services','Services'],['realtor','Buy & Sell'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ']].map(([id,label],i) => ({
       label, onClick: this.go(id), line: page === id ? '#A8864F' : 'transparent',
       op: open ? 1 : 0, tf: open ? 'none' : 'translateY(14px)', delay: open ? (0.08 + i * 0.05) + 's' : '0s'
     }));
