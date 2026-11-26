@@ -37,10 +37,10 @@ input,select,textarea{font-family:inherit}
 
 <header style="position:sticky;top:0;z-index:20;background:rgba(251,250,247,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(10,23,38,.08)">
   <div style="max-width:1240px;margin:0 auto;padding:24px clamp(20px,4vw,48px);display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between">
-    <button onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:14px;color:#0A0A0A;text-align:left">
-      <span style="font-family:'Roboto',sans-serif;font-weight:400;font-size:17px;letter-spacing:.42em">UNITY</span>
+    <button onClick="{{ goLanding }}" aria-label="Unity Group home" style="background:none;border:0;padding:0;cursor:pointer;display:flex;align-items:center;gap:14px;color:#0A0A0A;text-align:left">
+      <span style="font-family:'Roboto',sans-serif;font-size:17px;letter-spacing:.34em;line-height:1;white-space:nowrap;margin-right:-.34em"><span style="font-weight:700">UNITY</span><span style="font-weight:300">GROUP</span></span>
       <span style="width:1px;height:26px;background:rgba(10,23,38,.25)"></span>
-      <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;line-height:1.35;color:#3A4756">Property<br>Management</span>
+      <span style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;line-height:1.35;color:#3A4756"><span style="display:block">{{ brandSub1 }}</span><span style="display:block">{{ brandSub2 }}</span></span>
     </button>
     <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
       <button onClick="{{ toggleMenu }}" aria-label="{{ menuLabel }}" aria-expanded="{{ menuOpen }}" style="position:relative;z-index:40;width:44px;height:44px;margin-right:-10px;background:none;border:0;padding:0;cursor:pointer">
@@ -76,6 +76,41 @@ input,select,textarea{font-family:inherit}
 </sc-if>
 
 <main style="flex:1">
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Welcome" style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(64px,8vw,112px)">
+    <div style="display:grid;gap:14px;justify-items:center;text-align:center;margin-bottom:clamp(40px,5vw,64px)">
+      <h1 style="margin:0;font-family:'Roboto',sans-serif;font-size:clamp(30px,6vw,68px);letter-spacing:.24em;line-height:1.05;margin-right:-.24em"><span style="font-weight:700">UNITY</span><span style="font-weight:300">GROUP</span></h1>
+      <div style="font-size:clamp(10px,1.2vw,13px);letter-spacing:.5em;text-transform:uppercase;margin-right:-.5em">Real Estate · San Diego</div>
+      <p style="margin:18px 0 0;font-size:17px;line-height:1.65;color:#3A4756;max-width:560px">One team for buying, selling, managing, and building in San Diego County. Where would you like to start?</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:20px">
+      <sc-for list="{{ divCards }}" as="d" hint-placeholder-count="3">
+        <button onClick="{{ d.onClick }}" style="position:relative;display:flex;flex-direction:column;justify-content:flex-end;text-align:left;border:0;padding:0;cursor:pointer;aspect-ratio:4/5;max-height:560px;width:100%;background:#2E3A32 center/cover no-repeat;background-image:{{ d.bg }};color:#FFFFFF;overflow:hidden" style-hover="filter:brightness(1.08)">
+          <span style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,0) 35%,rgba(10,10,10,.78) 100%)"></span>
+          <span style="position:relative;display:grid;gap:10px;padding:clamp(22px,2.4vw,32px)">
+            <span style="font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:600;color:#E3CFA4">{{ d.num }}</span>
+            <span style="font-family:'Roboto',sans-serif;font-weight:300;font-size:clamp(24px,2.4vw,32px);line-height:1.15">{{ d.title }}</span>
+            <span style="font-size:15px;line-height:1.55;color:#E7EBE3;max-width:340px">{{ d.blurb }}</span>
+            <span style="margin-top:8px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:600">{{ d.cta }} →</span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isConstruction }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Construction" style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px) clamp(72px,9vw,120px)">
+    <div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#5B6878;font-weight:500;margin-bottom:22px">Construction &amp; Remodeling</div>
+    <h1 style="font-family:'Roboto',sans-serif;font-weight:300;font-size:clamp(30px,3.4vw,44px);line-height:1.12;letter-spacing:-.01em;margin:0 0 26px;max-width:960px;text-wrap:balance">This page is being built.</h1>
+    <p style="font-size:16px;line-height:1.7;color:#3A4756;max-width:640px;margin:0 0 30px">Full details on our construction and remodeling services are coming soon. In the meantime, call or email to talk through your project.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center">
+      <a href="tel:8583378615" style="background:#2E3A32;color:#FFFFFF;border:1px solid #2E3A32;padding:13px 26px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500">Call 858-337-8615</a>
+      <a href="mailto:KKestatemanagement@gmail.com" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#0A0A0A">Email us</a>
+    </div>
+  </section>
+</sc-if>
 
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
   <div style="background:#F4F0EA"><section data-screen-label="Home" style="max-width:1240px;margin:0 auto;padding:clamp(48px,7vw,104px) clamp(20px,4vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,96px);align-items:start">
@@ -433,14 +468,16 @@ class Component extends DCLogic {
   componentDidMount() { this._r = () => { const m = window.innerWidth < 860; if (m !== this.state.mobile) this.setState({ mobile: m, menu: false }); }; window.addEventListener('resize', this._r); this._r(); }
   componentWillUnmount() { window.removeEventListener('resize', this._r); document.body.style.overflow = ''; }
   componentDidUpdate() { document.body.style.overflow = this.state.menu ? 'hidden' : ''; }
-  go(p) { const F = {"home":"index.html","services":"services.html","areas":"areas.html","rentals":"rentals.html","about":"about.html","faq":"faq.html","contact":"contact.html","realtor":"realtor.html"}; return (e) => { if (e && e.preventDefault) e.preventDefault(); window.location.href = F[p]; }; }
+  go(p) { const F = {"landing":"index.html","home":"management.html","construction":"construction.html","services":"services.html","areas":"areas.html","rentals":"rentals.html","about":"about.html","faq":"faq.html","contact":"contact.html","realtor":"realtor.html"}; return (e) => { if (e && e.preventDefault) e.preventDefault(); window.location.href = F[p]; }; }
   renderVals() {
     const page = 'areas';
-    const nav = [['services','Services'],['realtor','Buy & Sell'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ']].map(([id,label]) => ({
+    const pm = !['landing','realtor','construction'].includes(page);
+    const divNav = [['realtor','Buy & Sell'],['home','Property Management'],['construction','Construction']];
+    const nav = (pm ? [['services','Services'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ']] : divNav).map(([id,label]) => ({
       label, onClick: this.go(id), color: page === id ? '#0A0A0A' : '#0A0A0A', line: page === id ? '#A8864F' : 'transparent'
     }));
     const open = this.state.menu;
-    const mobileNav = [['home','Home'],['services','Services'],['realtor','Buy & Sell'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ']].map(([id,label],i) => ({
+    const mobileNav = (pm ? [['home','Overview'],['services','Services'],['areas','Areas'],['rentals','Rentals'],['about','About'],['faq','FAQ'],['landing','All Unity services']] : [['landing','Home'], ...divNav]).map(([id,label],i) => ({
       label, onClick: this.go(id), line: page === id ? '#A8864F' : 'transparent',
       op: open ? 1 : 0, tf: open ? 'none' : 'translateY(14px)', delay: open ? (0.08 + i * 0.05) + 's' : '0s'
     }));
@@ -523,13 +560,20 @@ class Component extends DCLogic {
       { label: 'Phone', type: 'tel', ph: '(619) 555-0100', req: false },
       { label: 'Neighborhood', type: 'text', ph: 'e.g. La Jolla', req: false },
     ];
+    const divCards = [
+      { id: 'realtor', num: '01', title: 'Buy & Sell', blurb: 'Buyer rebates at closing and listing packages with the fee published up front.', cta: 'See how it works', img: 'assets/photo-backyard.png' },
+      { id: 'home', num: '02', title: 'Property Management', blurb: 'Leasing, rent collection, maintenance, and reporting for San Diego rental owners.', cta: 'Explore management', img: 'assets/photo-living.png' },
+      { id: 'construction', num: '03', title: 'Construction & Remodeling', blurb: 'Renovation and building projects, managed from plans to final walkthrough.', cta: 'Learn more', img: 'assets/hero-interior.png' },
+    ].map(d => ({ ...d, onClick: this.go(d.id), bg: 'url("' + d.img + '")' }));
+    const [brandSub1, brandSub2] = page === 'landing' ? ['Real Estate','San Diego'] : page === 'realtor' ? ['Buy &','Sell'] : page === 'construction' ? ['Construction &','Remodeling'] : ['Property','Management'];
     const ib = o => ({ ...o, iconBg: o.icon ? 'url("' + o.icon + '")' : 'none' });
     return {
       nav, regions, allAreas, services: services.map(ib), steps, proof: proof.map(ib), reviews, filters, faqs, creds, values, fields,
       listings: region === 'All' ? all : all.filter(l => l.region === region),
       showSample: this.props.showSampleLabels ?? true,
+      isLanding: page === 'landing', isConstruction: page === 'construction', divCards, brandSub1, brandSub2, goLanding: this.go('landing'),
       isHome: page === 'home', isServices: page === 'services', isAreas: page === 'areas', isRentals: page === 'rentals',
-      isAbout: page === 'about', isFaq: page === 'faq', isContact: page === 'contact', notContact: page !== 'contact',
+      isAbout: page === 'about', isFaq: page === 'faq', isContact: page === 'contact', notContact: pm && page !== 'contact',
       sent: this.state.sent, notSent: !this.state.sent,
       submit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
       resetForm: () => this.setState({ sent: false }),
