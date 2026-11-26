@@ -305,7 +305,7 @@ input,select,textarea{font-family:inherit}
         </div>
       </sc-for>
     </div>
-    <p style="margin:44px 0 0;font-size:13px;line-height:1.6;color:#5B6878;max-width:820px">Kevin Kang, REALTOR® · CA DRE #02234144 · Affiliated with Allison James Estates &amp; Homes. Commissions are not set by law and are fully negotiable. Terms are confirmed in a written representation agreement.</p>
+    <p style="margin:44px 0 0;font-size:13px;line-height:1.6;color:#5B6878;max-width:820px">Kevin Kang, licensed California real estate agent · DRE #02234144 · Affiliated with Allison James Estates &amp; Homes. Commissions are not set by law and are fully negotiable. Terms are confirmed in a written representation agreement.</p>
   </section>
 </sc-if>
 
@@ -612,7 +612,7 @@ class Component extends DCLogic {
     const exPrice = 1350000;
     const money = n => '$' + Math.round(n).toLocaleString('en-US');
     const rebateRows = [2.75, 2.5, 2.0].map(c => { const back = Math.min(Math.max(c - 1.25, 0), 1.5); return {
-      comm: c.toFixed(2).replace(/0$/, '') + '% (' + money(exPrice * c / 100) + ')', keep: '1.25% (' + money(exPrice * 0.0125) + ')',
+      comm: String(c) + '% (' + money(exPrice * c / 100) + ')', keep: '1.25% (' + money(exPrice * 0.0125) + ')',
       back: money(exPrice * back / 100) }; });
     const buyerPoints = [
       'Full buyer representation: search, showings, offers, negotiation, and escrow',
@@ -623,7 +623,7 @@ class Component extends DCLogic {
     const tierBase = [
       { name: 'Essential', tag: '', rate: '1.5%', pct: 1.5, blurb: 'A clean, professional launch for homes that show well on their own.',
         items: ['Professional photography','Listed on the MLS','Syndicated to Zillow, Redfin, Realtor.com and other major sites','Pricing analysis from recent neighborhood sales','Yard sign, lockbox, and showing coordination','Offer negotiation and contract-to-close management'] },
-      { name: 'Signature', tag: 'Most popular', rate: '2%', pct: 2, blurb: 'Everything in Essential, plus the video and advertising that gets a listing seen.',
+      { name: 'Signature', tag: 'Recommended', rate: '2%', pct: 2, blurb: 'Everything in Essential, plus the video and advertising that gets a listing seen.',
         items: ['Drone aerial video and photos','Cinematic walkthrough video','3D virtual tour and floor plan','Twilight photography','Paid social media ad campaign','Hosted open houses','Mandarin-language marketing on WeChat and Xiaohongshu'] },
       { name: 'Premier', tag: 'Full service', rate: '3%', pct: 3, blurb: 'Everything in Signature, plus we prepare the home so it sells at its best.',
         items: ['Professional staging included','Pre-listing home inspection','Deep clean before photos','Repair and prep work coordinated through our construction team','Dedicated property website','Printed brochures and neighborhood mailers'] },
