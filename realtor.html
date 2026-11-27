@@ -343,9 +343,26 @@ input,select,textarea{font-family:inherit}
           <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;grid-column:1/-1">Name<input name="Name" type="text" required="{{ yes }}" placeholder="Jane Smith" autocomplete="name" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"></label>
           <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">Email<input name="Email" type="email" required="{{ yes }}" placeholder="you@email.com" autocomplete="email" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"></label>
           <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">Phone (optional)<input name="Phone" type="tel" placeholder="(619) 555-0100" autocomplete="tel" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"></label>
-          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;grid-column:1/-1">I'm looking to<select name="Looking to" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"><option>Buy a home</option><option>Sell a home</option><option>Buy and sell</option></select></label>
-          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">How soon are you looking to take action?<select name="Timeline" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"><option>1–2 months</option><option>2–3 months</option><option>3–6 months</option><option>6+ months</option></select></label>
-          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">What is your target home price?<select name="Target home price" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"><option>Below $850K</option><option>$850K – $1.1M</option><option>$1.1M – $1.35M</option><option>$1.35M – $1.65M</option><option>$1.65M – $2M</option><option>$2M+</option></select></label>
+          <sc-for list="{{ leadSelects }}" as="s" hint-placeholder-count="3">
+            <div style="position:relative;display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;grid-column:{{ s.col }};z-index:{{ s.z }}">
+              <span id="{{ s.labelId }}">{{ s.label }}</span>
+              <input type="hidden" name="{{ s.name }}" value="{{ s.value }}">
+              <button type="button" onClick="{{ s.toggle }}" aria-haspopup="listbox" aria-expanded="{{ s.open }}" aria-labelledby="{{ s.labelId }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;font-size:16px;font-weight:400;letter-spacing:0;padding:14px 16px;color:#0A0A0A;cursor:pointer;border-radius:14px;border:1px solid {{ s.ring }};background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.46));-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 2px rgba(10,23,38,.06);transition:border-color .2s,box-shadow .2s" style-hover="box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 14px rgba(10,23,38,.10)">
+                <span>{{ s.value }}</span>
+                <span aria-hidden="true" style="width:8px;height:8px;border-right:1.5px solid #2E3A32;border-bottom:1.5px solid #2E3A32;transform:{{ s.chev }};transition:transform .25s cubic-bezier(.2,.7,.2,1);margin-right:4px;flex:none"></span>
+              </button>
+              <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}">
+                <button type="button" aria-label="Close menu" tabindex="-1" onClick="{{ s.close }}" style="position:fixed;inset:0;z-index:1;background:transparent;border:0;padding:0;cursor:default"></button>
+                <div role="listbox" aria-labelledby="{{ s.labelId }}" style="position:absolute;z-index:2;top:calc(100% + 8px);left:0;right:0;padding:6px;display:grid;gap:2px;border-radius:18px;border:1px solid rgba(255,255,255,.7);background:linear-gradient(160deg,rgba(255,255,255,.62),rgba(244,240,234,.42));-webkit-backdrop-filter:blur(26px) saturate(190%);backdrop-filter:blur(26px) saturate(190%);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.35),0 24px 60px rgba(10,23,38,.22),0 2px 8px rgba(10,23,38,.08)">
+                  <sc-for list="{{ s.opts }}" as="o" hint-placeholder-count="4">
+                    <button type="button" role="option" aria-selected="{{ o.sel }}" onClick="{{ o.pick }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;border:0;border-radius:12px;padding:12px 14px;font-size:16px;letter-spacing:0;cursor:pointer;color:#0A0A0A;font-weight:{{ o.weight }};background:{{ o.bg }};transition:background .15s" style-hover="background:rgba(46,58,50,.12)">
+                      <span>{{ o.label }}</span><span aria-hidden="true" style="color:#A8864F;font-weight:700">{{ o.mark }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
           <input name="_honey" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <div style="grid-column:1/-1;display:grid;gap:12px;justify-items:start">
             <button type="submit" style="background:#2E3A32;color:#FFFFFF;border:1px solid #2E3A32;border-radius:0;padding:15px 30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;cursor:pointer" style-hover="background:#0A0A0A;color:#FFFFFF">{{ leadBtn }}</button>
@@ -731,13 +748,26 @@ class Component extends DCLogic {
         .catch(() => this.setState({ leadErr: true, leadBusy: false }));
     };
     const toInterest = () => { const el = document.getElementById('interest-list'); if (el) el.scrollIntoView({ behavior: 'smooth' }); };
+    const selDefs = [
+      { name: 'Looking to', label: "I'm looking to", col: '1/-1', options: ['Buy a home','Sell a home','Buy and sell'] },
+      { name: 'Timeline', label: 'How soon are you looking to take action?', col: 'auto', options: ['1–2 months','2–3 months','3–6 months','6+ months'] },
+      { name: 'Target home price', label: 'What is your target home price?', col: 'auto', options: ['Below $850K','$850K – $1.1M','$1.1M – $1.35M','$1.35M – $1.65M','$1.65M – $2M','$2M+'] },
+    ];
+    const selVals = this.state.selVals || {}; const selOpen = this.state.selOpen;
+    const leadSelects = selDefs.map((d, i) => { const value = selVals[d.name] || d.options[0]; const open = selOpen === d.name; return {
+      name: d.name, label: d.label, col: d.col, value, open, labelId: 'lead-sel-' + i, z: open ? 40 : 'auto',
+      ring: open ? '#2E3A32' : 'rgba(10,23,38,.22)', chev: open ? 'translateY(2px) rotate(225deg)' : 'translateY(-2px) rotate(45deg)',
+      toggle: () => this.setState({ selOpen: open ? null : d.name }), close: () => this.setState({ selOpen: null }),
+      opts: d.options.map(o => ({ label: o, sel: o === value, mark: o === value ? '✓' : '', weight: o === value ? 600 : 400,
+        bg: o === value ? 'rgba(255,255,255,.55)' : 'transparent',
+        pick: () => this.setState(s => ({ selVals: { ...(s.selVals || {}), [d.name]: o }, selOpen: null })) })) }; });
     const ib = o => ({ ...o, iconBg: o.icon ? 'url("' + o.icon + '")' : 'none' });
     return {
       nav, regions, allAreas, services: services.map(ib), steps, proof: proof.map(ib), reviews, filters, faqs, creds, values, fields,
       listings: region === 'All' ? all : all.filter(l => l.region === region),
       showSample: this.props.showSampleLabels ?? true,
       isRealtor: page === 'realtor', rebateRows, buyerPoints, tiers, stagingNote, reSteps, examplePrice: money(exPrice),
-      submitLead, toInterest, yes: true, leadOpen: !this.state.leadSent, leadSent: !!this.state.leadSent, leadErr: !!this.state.leadErr, leadBtn: this.state.leadBusy ? 'Sending…' : 'Join the interest list',
+      submitLead, toInterest, leadSelects, yes: true, leadOpen: !this.state.leadSent, leadSent: !!this.state.leadSent, leadErr: !!this.state.leadErr, leadBtn: this.state.leadBusy ? 'Sending…' : 'Join the interest list',
       isLanding: page === 'landing', isConstruction: page === 'construction', divCards, brandSub1, brandSub2, goLanding: this.go('landing'),
       isHome: page === 'home', isServices: page === 'services', isAreas: page === 'areas', isRentals: page === 'rentals',
       isAbout: page === 'about', isFaq: page === 'faq', isContact: page === 'contact', notContact: pm && page !== 'contact',
