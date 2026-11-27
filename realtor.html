@@ -265,7 +265,7 @@ input,select,textarea{font-family:inherit}
     <h1 style="font-family:'Roboto',sans-serif;font-weight:300;font-size:clamp(30px,3.4vw,44px);line-height:1.12;letter-spacing:-.01em;margin:0 0 26px;max-width:960px;text-wrap:balance">Buy a home and get paid at closing. Sell one and choose what you pay for.</h1>
     <p style="font-size:16px;line-height:1.7;color:#3A4756;max-width:680px;margin:0 0 30px">Real estate commissions are negotiable, so we publish ours. Buyers get a share of our commission back. Sellers pick a listing package and know the fee before signing anything.</p>
     <div style="display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center">
-      <button onClick="{{ goContact }}" style="background:#2E3A32;color:#FFFFFF;border:1px solid #2E3A32;border-radius:0;padding:13px 26px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;cursor:pointer" style-hover="background:#0A0A0A;color:#FFFFFF">Talk to Kevin</button>
+      <button onClick="{{ toInterest }}" style="background:#2E3A32;color:#FFFFFF;border:1px solid #2E3A32;border-radius:0;padding:13px 26px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;cursor:pointer" style-hover="background:#0A0A0A;color:#FFFFFF">Join the interest list</button>
       <a href="tel:8583378615" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;color:#0A0A0A">858-337-8615</a>
     </div>
   </section>
@@ -326,6 +326,42 @@ input,select,textarea{font-family:inherit}
       </sc-for>
     </div>
     <p style="margin:28px 0 0;font-size:13px;line-height:1.6;color:#B9C1B4;max-width:820px">Listing fees are a percentage of the final sale price and cover the listing side only. Any compensation to a buyer's agent is separate and negotiated in your transaction. {{ stagingNote }}</p>
+  </section>
+  </div>
+
+  <div id="interest-list" style="background:#F4F0EA;scroll-margin-top:90px">
+  <section style="max-width:1240px;margin:0 auto;padding:clamp(56px,7vw,96px) clamp(20px,4vw,48px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:36px 72px;align-items:start">
+      <div style="display:grid;gap:16px;align-content:start">
+        <div style="font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#A8864F;font-weight:600">Interest list</div>
+        <h2 style="font-family:'Roboto',sans-serif;font-weight:300;font-size:clamp(26px,2.8vw,36px);line-height:1.15;margin:0;text-wrap:balance">Tell us what you're looking for.</h2>
+        <p style="margin:0;font-size:17px;line-height:1.65;color:#3A4756;max-width:480px">Answer a few quick questions and Kevin will follow up personally with next steps for your timeline and price range.</p>
+      </div>
+      <div>
+      <sc-if value="{{ leadOpen }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submitLead }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;grid-column:1/-1">Name<input name="Name" type="text" required="{{ yes }}" placeholder="Jane Smith" autocomplete="name" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"></label>
+          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">Email<input name="Email" type="email" required="{{ yes }}" placeholder="you@email.com" autocomplete="email" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"></label>
+          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">Phone (optional)<input name="Phone" type="tel" placeholder="(619) 555-0100" autocomplete="tel" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"></label>
+          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;grid-column:1/-1">I'm looking to<select name="Looking to" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"><option>Buy a home</option><option>Sell a home</option><option>Buy and sell</option></select></label>
+          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">How soon are you looking to take action?<select name="Timeline" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"><option>1–2 months</option><option>2–3 months</option><option>3–6 months</option><option>6+ months</option></select></label>
+          <label style="display:grid;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em">What is your target home price?<select name="Target home price" style="font-size:16px;padding:14px 16px;border:1px solid rgba(10,23,38,.25);border-radius:0;background:#fff;color:#0A0A0A;font-weight:400;outline-color:#0A0A0A"><option>Below $850K</option><option>$850K – $1.1M</option><option>$1.1M – $1.35M</option><option>$1.35M – $1.65M</option><option>$1.65M – $2M</option><option>$2M+</option></select></label>
+          <input name="_honey" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <div style="grid-column:1/-1;display:grid;gap:12px;justify-items:start">
+            <button type="submit" style="background:#2E3A32;color:#FFFFFF;border:1px solid #2E3A32;border-radius:0;padding:15px 30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;cursor:pointer" style-hover="background:#0A0A0A;color:#FFFFFF">{{ leadBtn }}</button>
+            <sc-if value="{{ leadErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#9A2B1E">Something went wrong sending your details. Please try again, or call 858-337-8615.</span></sc-if>
+            <span style="font-size:13px;line-height:1.5;color:#5B6878">We only use your details to follow up about your home plans.</span>
+          </div>
+        </form>
+      </sc-if>
+      <sc-if value="{{ leadSent }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#FBFAF7;border:1px solid rgba(10,23,38,.14);padding:clamp(24px,3vw,36px);display:grid;gap:10px">
+          <h3 style="margin:0;font-family:'Roboto',sans-serif;font-weight:300;font-size:24px">You're on the list.</h3>
+          <p style="margin:0;font-size:16px;line-height:1.6;color:#3A4756">Thanks. Kevin will be in touch shortly. If it's urgent, call 858-337-8615.</p>
+        </div>
+      </sc-if>
+      </div>
+    </div>
   </section>
   </div>
 
@@ -682,12 +718,26 @@ class Component extends DCLogic {
       { id: 'construction', num: '03', title: 'Construction & Remodeling', blurb: 'Renovation and building projects, managed from plans to final walkthrough.', cta: 'Learn more', img: 'assets/hero-interior.png' },
     ].map(d => ({ ...d, onClick: this.go(d.id), bg: 'url("' + d.img + '")' }));
     const [brandSub1, brandSub2] = page === 'landing' ? ['Real Estate','San Diego'] : page === 'realtor' ? ['Buy &','Sell'] : page === 'construction' ? ['Construction &','Remodeling'] : ['Property','Management'];
+    const submitLead = (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+      if (data._honey) { this.setState({ leadSent: true }); return; }
+      delete data._honey;
+      data._subject = 'New interest list signup: ' + (data.Name || '');
+      data._template = 'table'; data._captcha = 'false';
+      this.setState({ leadBusy: true, leadErr: false });
+      fetch('https://formsubmit.co/ajax/KKestatemanagement@gmail.com', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
+        .then(r => r.json().then(j => { if (!r.ok || String(j.success) === 'false') throw new Error('send failed'); this.setState({ leadSent: true, leadBusy: false }); }))
+        .catch(() => this.setState({ leadErr: true, leadBusy: false }));
+    };
+    const toInterest = () => { const el = document.getElementById('interest-list'); if (el) el.scrollIntoView({ behavior: 'smooth' }); };
     const ib = o => ({ ...o, iconBg: o.icon ? 'url("' + o.icon + '")' : 'none' });
     return {
       nav, regions, allAreas, services: services.map(ib), steps, proof: proof.map(ib), reviews, filters, faqs, creds, values, fields,
       listings: region === 'All' ? all : all.filter(l => l.region === region),
       showSample: this.props.showSampleLabels ?? true,
       isRealtor: page === 'realtor', rebateRows, buyerPoints, tiers, stagingNote, reSteps, examplePrice: money(exPrice),
+      submitLead, toInterest, yes: true, leadOpen: !this.state.leadSent, leadSent: !!this.state.leadSent, leadErr: !!this.state.leadErr, leadBtn: this.state.leadBusy ? 'Sending…' : 'Join the interest list',
       isLanding: page === 'landing', isConstruction: page === 'construction', divCards, brandSub1, brandSub2, goLanding: this.go('landing'),
       isHome: page === 'home', isServices: page === 'services', isAreas: page === 'areas', isRentals: page === 'rentals',
       isAbout: page === 'about', isFaq: page === 'faq', isContact: page === 'contact', notContact: pm && page !== 'contact',
